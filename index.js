@@ -193,12 +193,16 @@ app.delete("/terminate", async (req, res) => {
 app.get("/",(req,res)=>{
     res.render("home")
 })
-
 async function main() {
-    await mongoose.connect("mongodb+srv://chiteshvarunvarun:test123@cluster0.u441nrv.mongodb.net/osy");
-    
-    
+  try {
+    await mongoose.connect("mongodb+srv://chiteshvarunvarun:test123@cluster0.u441nrv.mongodb.net/osy?retryWrites=true&w=majority");
+    console.log("Database connected successfully");
+  } catch (error) {
+    console.error("Database connection error:", error);
   }
+}
+
+
   main().then(()=>{
     console.log("db connect")
   }).catch(err=>console.log(err))
