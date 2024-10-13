@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banker's Algorithm</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .navbar {
+            background-color: #007bff;
+        }
+
+        .navbar a {
+            color: white;
+        }
+
+        .navbar a:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        .content {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .content h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .advantages, .disadvantages {
+            text-align: left;
+            margin-top: 40px;
+        }
+
+        .advantages h2, .disadvantages h2 {
+            color: #007bff;
+        }
+
+        .advantages ul, .disadvantages ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Banker's Algorithm</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/test">Resource</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/process">Process</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/alld">Execute</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content">
+        <h1>Welcome to Banker's Algorithm Simulator</h1>
+        <p>The Banker's Algorithm is a resource allocation and deadlock avoidance algorithm developed by Edsger Dijkstra. It tests for safety by simulating the allocation of predetermined maximum possible amounts of all resources and then makes a decision whether it is safe to allocate resources to processes or not.</p>
+
+        <div class="advantages">
+            <h2>Advantages</h2>
+            <ul>
+                <li>It contains various resources that meet the requirements of each process.</li>
+                <li>Each process provides information to the OS for upcoming resource requests, resource numbers, and how long they will be held.</li>
+                <li>It helps the OS manage and control process requests for each type of resource in the system.</li>
+                <li>It has a Max resource attribute that indicates the maximum number of resources each process can hold in a system.</li>
+            </ul>
+        </div>
+
+        <div class="disadvantages">
+            <h2>Disadvantages</h2>
+            <ul>
+                <li>It requires a fixed number of processes, and no additional processes can be started while the algorithm is in execution.</li>
+                <li>The algorithm does not allow processes to change their maximum needs while processing tasks.</li>
+                <li>Each process must know and state its maximum resource requirements in advance.</li>
+                <li>While resource requests are granted in a finite time, the limit for resource allocation is one year.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

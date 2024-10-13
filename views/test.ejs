@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Resource</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .navbar {
+            background-color: #007bff;
+        }
+
+        .navbar a {
+            color: white;
+        }
+
+        .navbar a:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 30px;
+        }
+
+        input, button {
+            margin: 10px 0;
+        }
+
+        .res {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .res h1 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .res p {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .res a, .res form button {
+            margin-right: 10px;
+        }
+
+        form button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Resource Manager</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/test">Resource</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/process">Process</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/alld">Execute</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content">
+        <h1>Create New Resource</h1>
+        <form action="/newresource" method="post">
+            <input type="text" name="name" placeholder="Resource Name" class="form-control">
+            <input type="number" name="units" placeholder="Units" class="form-control">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <!-- Display resources from the 'all' array -->
+        <% for (let a of all) { %>
+            <div class="res">
+                <h1><%= a.name %></h1>
+                <p>units:-<%= a.units %></p>
+                <a href="/edit/resource/<%=a._id %>" class="btn btn-warning">Edit</a>
+                <form action="resource/<%=a._id %>?_method=DELETE" method="post" style="display:inline;">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        <% } %>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
