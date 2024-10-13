@@ -196,7 +196,7 @@ app.get("/",(req,res)=>{
 
 async function main() {
     await mongoose.connect("mongodb+srv://chiteshvarunvarun:test123@cluster0.u441nrv.mongodb.net/osy");
-  
+    
     
   }
   main().then(()=>{
