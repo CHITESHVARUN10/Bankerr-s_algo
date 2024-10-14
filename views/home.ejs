@@ -28,7 +28,6 @@
 
         .content {
             padding: 40px;
-            text-align: center;
         }
 
         .content h1 {
@@ -42,7 +41,6 @@
         }
 
         .advantages, .disadvantages {
-            text-align: left;
             margin-top: 40px;
         }
 
@@ -54,12 +52,30 @@
             list-style-type: disc;
             margin-left: 20px;
         }
+
+        @media (max-width: 576px) {
+            .content {
+                padding: 20px;
+            }
+
+            .content h1 {
+                font-size: 24px;
+            }
+
+            .content p {
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="#">Banker's Algorithm</a>
-        <div class="collapse navbar-collapse">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/test">Resource</a>
@@ -74,28 +90,33 @@
         </div>
     </nav>
 
-    <div class="content">
-        <h1>Welcome to Banker's Algorithm Simulator</h1>
+    <!-- Main Content -->
+    <div class="container content">
+        <h1 class="display-4">Welcome to Banker's Algorithm Simulator</h1>
         <p>The Banker's Algorithm is a resource allocation and deadlock avoidance algorithm developed by Edsger Dijkstra. It tests for safety by simulating the allocation of predetermined maximum possible amounts of all resources and then makes a decision whether it is safe to allocate resources to processes or not.</p>
 
-        <div class="advantages">
-            <h2>Advantages</h2>
-            <ul>
-                <li>It contains various resources that meet the requirements of each process.</li>
-                <li>Each process provides information to the OS for upcoming resource requests, resource numbers, and how long they will be held.</li>
-                <li>It helps the OS manage and control process requests for each type of resource in the system.</li>
-                <li>It has a Max resource attribute that indicates the maximum number of resources each process can hold in a system.</li>
-            </ul>
-        </div>
+        <div class="row">
+            <!-- Advantages Section -->
+            <div class="col-md-6 advantages">
+                <h2>Advantages</h2>
+                <ul>
+                    <li>It contains various resources that meet the requirements of each process.</li>
+                    <li>Each process provides information to the OS for upcoming resource requests, resource numbers, and how long they will be held.</li>
+                    <li>It helps the OS manage and control process requests for each type of resource in the system.</li>
+                    <li>It has a Max resource attribute that indicates the maximum number of resources each process can hold in a system.</li>
+                </ul>
+            </div>
 
-        <div class="disadvantages">
-            <h2>Disadvantages</h2>
-            <ul>
-                <li>It requires a fixed number of processes, and no additional processes can be started while the algorithm is in execution.</li>
-                <li>The algorithm does not allow processes to change their maximum needs while processing tasks.</li>
-                <li>Each process must know and state its maximum resource requirements in advance.</li>
-                <li>While resource requests are granted in a finite time, the limit for resource allocation is one year.</li>
-            </ul>
+            <!-- Disadvantages Section -->
+            <div class="col-md-6 disadvantages">
+                <h2>Disadvantages</h2>
+                <ul>
+                    <li>It requires a fixed number of processes, and no additional processes can be started while the algorithm is in execution.</li>
+                    <li>The algorithm does not allow processes to change their maximum needs while processing tasks.</li>
+                    <li>Each process must know and state its maximum resource requirements in advance.</li>
+                    <li>While resource requests are granted in a finite time, the limit for resource allocation is one year.</li>
+                </ul>
+            </div>
         </div>
     </div>
 

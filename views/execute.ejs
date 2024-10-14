@@ -14,7 +14,7 @@
         }
 
         .content {
-            padding: 40px;
+            padding: 20px;
             margin: 20px;
             background-color: #fff;
             border-radius: 10px;
@@ -25,6 +25,7 @@
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
+            overflow-x: auto;
         }
 
         table, th, td {
@@ -33,7 +34,7 @@
 
         th, td {
             padding: 10px;
-            text-align: left;
+            text-align: center;
         }
 
         button {
@@ -83,13 +84,32 @@
             color: #333;
             margin-bottom: 20px;
         }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 10px;
+                margin: 10px;
+            }
+
+            table, th, td {
+                font-size: 14px;
+                padding: 5px;
+            }
+
+            button {
+                padding: 5px 10px;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Blue Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">Process Allocation</a>
-        <div class="collapse navbar-collapse">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/test">Resource</a>
@@ -105,69 +125,79 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="content">
+    <div class="container-fluid content">
         <h2>Resource and Process Data</h2>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Process</th>
-                    <% for( a of data.resources ) { %>
-                        <th><%= a.name %> Allocation</th>
-                    <% } %>
-                    <% for( a of data.resources ) { %>
-                        <th><%= a.name %> Max</th>
-                    <% } %>
-                    <% for( a of data.resources ) { %>
-                        <th><%= a.name %> Available</th>
-                    <% } %>
-                </tr>
-            </thead>
-            <tbody>
-                <% for (let d of data.processes) { %>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
                     <tr>
-                        <td><%= d.name %></td>
-                        <% for( a of d.allocation ) { %>
-                            <td><%= a.units %></td>
+                        <th>Process</th>
+                        <% for( a of data.resources ) { %>
+                            <th><%= a.name %> Allocation</th>
                         <% } %>
-                        <% for( n of d.allocation ) { %>
-                            <td><%= n.need %></td>
+                        <% for( a of data.resources ) { %>
+                            <th><%= a.name %> Max</th>
                         <% } %>
-                        <% for( r of data.resources ) { %>
-                            <td><%= r.units %></td>
+                        <% for( a of data.resources ) { %>
+                            <th><%= a.name %> Available</th>
                         <% } %>
                     </tr>
-                <% } %>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <% for (let d of data.processes) { %>
+                        <tr>
+                            <td><%= d.name %></td>
+                            <% for( a of d.allocation ) { %>
+                                <td><%= a.units %></td>
+                            <% } %>
+                            <% for( n of d.allocation ) { %>
+                                <td><%= n.need %></td>
+                            <% } %>
+                            <% for( r of data.resources ) { %>
+                                <td><%= r.units %></td>
+                            <% } %>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
 
         <h2>Need Table</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Process</th>
-                    <% for( r of data.resources  ) { %>
-                        <th><%= r.name %> Need</th>
-                    <% } %>
-                </tr>
-            </thead>
-            <tbody>
-                <% for(p of data.processes) { %>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
                     <tr>
-                        <td><%= p.name %></td>
-                        <% for(a of p.allocation ) { %>
-                            <td><%= a.need - a.units %></td>
+                        <th>Process</th>
+                        <% for( r of data.resources  ) { %>
+                            <th><%= r.name %> Need</th>
                         <% } %>
                     </tr>
-                <% } %>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <% for(p of data.processes) { %>
+                        <tr>
+                            <td><%= p.name %></td>
+                            <% for(a of p.allocation ) { %>
+                                <td><%= a.need - a.units %></td>
+                            <% } %>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
 
-        <button id="terminateBtn">Terminate All Processes and Resources</button>
-        <button id="runBtn" onclick="exe()">Run</button>
+        <div class="d-flex justify-content-between">
+            <button id="terminateBtn" class="btn">Terminate All Processes and Resources</button>
+            <button id="runBtn" class="btn" onclick="exe()">Run</button>
+        </div>
+
         <p id="out"></p>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="e.js"></script>
 </body>

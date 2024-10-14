@@ -14,11 +14,8 @@
         }
 
         .content {
-            padding: 40px;
+            padding: 40px 15px;
             margin: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         form {
@@ -26,12 +23,11 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
+            max-width: 100%;
             margin: auto;
         }
 
         input[type="text"], input[type="number"] {
-            width: 100%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
@@ -73,7 +69,10 @@
     <!-- Blue Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="#">Process Allocation</a>
-        <div class="collapse navbar-collapse">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/test">Resource</a>
@@ -89,25 +88,31 @@
     </nav>
 
     <!-- Form for Process Allocation -->
-    <div class="content">
-        <form id="insert">
-            <h2>Create a Process</h2>
-            <input type="text" name="name" placeholder="Process Name" required>
+    <div class="container content">
+        <form id="insert" class="row">
+            <div class="col-12">
+                <h2>Create a Process</h2>
+                <input type="text" class="form-control" name="name" placeholder="Process Name" required>
+                <hr>
+            </div>
       
-            <hr>
             <% for( a of r ) { %>
+            <div class="col-md-6">
                 <div class="resource-block">
                     <label>Resource Name: <%= a.name %></label>
-                    <input readonly value="<%= a.units %>" name="<%= a.name %>units" placeholder="Available Units">
-                    <input readonly value="<%= a._id %>" name="<%= a.name %>id">
-                    <input type="number" name="<%= a.name %>allocation" placeholder="Allocate Units" min="0" max="<%= a.curr %>" required>
-                    <input type="number" name="<%= a.name %>need" placeholder="Need Units" min="0" required>
+                    <input type="text" class="form-control" readonly value="<%= a.units %>" name="<%= a.name %>units" placeholder="Available Units">
+                    <input type="hidden" readonly value="<%= a._id %>" name="<%= a.name %>id">
+                    <input type="number" class="form-control" name="<%= a.name %>allocation" placeholder="Allocate Units" min="0" max="<%= a.curr %>" required>
+                    <input type="number" class="form-control" name="<%= a.name %>need" placeholder="Need Units" min="0" required>
                 </div>
-            <hr>
+            </div>
             <% } %>
-            <button type="submit">Submit</button>
+            <div class="col-12">
+                <button type="submit" class="btn btn-success btn-block">Submit</button>
+            </div>
         </form>
     </div>
+
     <script src="/p.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

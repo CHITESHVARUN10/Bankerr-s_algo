@@ -27,7 +27,7 @@
         }
 
         .content {
-            padding: 40px;
+            padding: 40px 15px;
         }
 
         h1 {
@@ -76,13 +76,34 @@
         form button:hover {
             background-color: #c82333;
         }
+
+        @media (max-width: 576px) {
+            .content {
+                padding: 20px;
+            }
+
+            .res {
+                margin-bottom: 15px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+
+            form {
+                margin-bottom: 20px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="#">Resource Manager</a>
-        <div class="collapse navbar-collapse">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/test">Resource</a>
@@ -97,25 +118,33 @@
         </div>
     </nav>
 
-    <div class="content">
-        <h1>Create New Resource</h1>
-        <form action="/newresource" method="post">
-            <input type="text" name="name" placeholder="Resource Name" class="form-control">
-            <input type="number" name="units" placeholder="Units" class="form-control">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-
-        <!-- Display resources from the 'all' array -->
-        <% for (let a of all) { %>
-            <div class="res">
-                <h1><%= a.name %></h1>
-                <p>units:-<%= a.units %></p>
-                <a href="/edit/resource/<%=a._id %>" class="btn btn-warning">Edit</a>
-                <form action="resource/<%=a._id %>?_method=DELETE" method="post" style="display:inline;">
-                    <button class="btn btn-danger">Delete</button>
+    <div class="container content">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <h1>Create New Resource</h1>
+                <form action="/newresource" method="post">
+                    <input type="text" name="name" placeholder="Resource Name" class="form-control" required>
+                    <input type="number" name="units" placeholder="Units" class="form-control" required>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
                 </form>
             </div>
-        <% } %>
+        </div>
+
+        <!-- Display resources from the 'all' array -->
+        <div class="row">
+            <% for (let a of all) { %>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="res">
+                    <h1><%= a.name %></h1>
+                    <p>Units: <%= a.units %></p>
+                    <a href="/edit/resource/<%= a._id %>" class="btn btn-warning">Edit</a>
+                    <form action="resource/<%= a._id %>?_method=DELETE" method="post" style="display:inline;">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+            <% } %>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
