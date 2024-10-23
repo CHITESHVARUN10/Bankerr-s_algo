@@ -87,7 +87,7 @@ app.post("/create/process", async (req, res) => {
           unit: a.units  // max units
       }))
   });
-    // Iterate over allocation array to update resource units
+   
     for (let alloc of allocation) {
         // Find the resource by ID
         const resource = await Resource.findById(alloc.rid);
@@ -96,15 +96,15 @@ app.post("/create/process", async (req, res) => {
             return res.status(404).json({ error: "Resource not found" });
         }
 
-        // Ensure there are enough available units before updating
+       
         if (resource.units < alloc.units) {
             return res.status(400).json({ error: `Not enough units available for resource: ${resource.name}` });
         }
 
-        // Subtract the allocated units from the resource's available units
+       
         resource.units -= alloc.units;
 
-        // Save the updated resource
+   
         await resource.save();
     }
 
@@ -165,7 +165,7 @@ app.post("/execute/:id", async (req, res) => {
 
 
 
-// Fetch all resources and processes
+
 app.get("/alld", async (req, res) => {
   let resources = await Resource.find();
   let processes = await Process.find();
@@ -176,10 +176,10 @@ app.get("/alld", async (req, res) => {
   };
 
   console.log(data);
-  res.render("execute", { data });  // Pass 'data' to EJS
+  res.render("execute", { data }); 
 });
 
-// Delete all data from both Resource and Process collections
+
 app.delete("/terminate", async (req, res) => {
   try {
       await Resource.deleteMany({});
@@ -194,7 +194,7 @@ app.get("/",(req,res)=>{
     res.render("home")
 })
 async function main() {
-  try {
+  try {//mongodb://localhost:27017/
     await mongoose.connect("mongodb+srv://chiteshvarunvarun:test123@cluster0.u441nrv.mongodb.net/osy?retryWrites=true&w=majority");
     console.log("Database connected successfully");
   } catch (error) {
