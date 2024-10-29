@@ -25,6 +25,8 @@ async function exe() {
     let executedProcesses = [];
     let totalProcesses = processes.length;
 
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
     while (executedProcesses.length < totalProcesses) {
         let executedInThisCycle = false;
 
@@ -43,48 +45,48 @@ async function exe() {
                 }
             }
 
+            let textd = document.createElement("p");
             if (execute) {
                 let send = await axios.post(`/execute/${p._id}`);
-                setTimeout(() => {
-                    
-                }, 1000);
-                console.log(send.data.message);
-                ultimate = true;
+                await delay(1000);  // Delay before the message
 
-                let textd = document.createElement("p");
+                // Show execution message
                 textd.innerText = `Process ${p.name} is being executed as all its needs are less than or equal to available resources.`;
+                textd.classList.add('fade-in');  // Apply fade-in animation
                 out.appendChild(textd);
-                setTimeout(() => {
-                    
-                }, 2000);
+                
+                ultimate = true;
+                await delay(2000);  // Delay before updating resources
 
+                // Update available resources
                 for (let i = 0; i < avail.length; i++) {
                     avail[i].units += p.allocation[i].units;
                 }
-
+                
                 executedProcesses.push(p._id);
                 executedInThisCycle = true;
             } else {
-                let textd = document.createElement("p");
+                // Show "not executed" message
                 textd.innerText = `Process ${p.name} is not being executed now as its need is greater than available resources.`;
+                textd.classList.add('fade-in');
                 out.appendChild(textd);
-                setTimeout(() => {
-                    
-                }, 2000);
+                await delay(2000);
             }
         }
 
         if (!executedInThisCycle) {
+            await delay(1000);  // Delay before unsafe alert
             alert("unsafe");
             return;
         }
     }
 
+    // All processes executed, display safe alert
     if (executedProcesses.length === totalProcesses) {
+        await delay(1000);
         alert("safe");
     }
 }
-
 
 
       

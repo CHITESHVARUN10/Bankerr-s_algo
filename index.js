@@ -195,6 +195,9 @@ app.get("/",(req,res)=>{
 })
 async function main() {
   try {//mongodb://localhost:27017/
+    // await mongoose.connect("mongodb://localhost:27017/first");
+    // console.log("Database connected successfully");
+
     await mongoose.connect("mongodb+srv://chiteshvarunvarun:test123@cluster0.u441nrv.mongodb.net/osy?retryWrites=true&w=majority");
     console.log("Database connected successfully");
   } catch (error) {

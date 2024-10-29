@@ -25,7 +25,6 @@
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
-            overflow-x: auto;
         }
 
         table, th, td {
@@ -85,6 +84,34 @@
             margin-bottom: 20px;
         }
 
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .output-section {
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #e0f7fa;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-section {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
         @media (max-width: 768px) {
             .content {
                 padding: 10px;
@@ -103,9 +130,8 @@
     </style>
 </head>
 <body>
-    <!-- Blue Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">Process Allocation</a>
+        <a class="navbar-brand" href="#">Process Execution</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -124,9 +150,12 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <div class="container-fluid content">
         <h2>Resource and Process Data</h2>
+        <div class="button-section">
+            <button id="terminateBtn" class="btn">Terminate All Processes and Resources</button>
+            <button id="runBtn" class="btn" onclick="exe()">Run</button>
+        </div>
 
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -187,12 +216,10 @@
             </table>
         </div>
 
-        <div class="d-flex justify-content-between">
-            <button id="terminateBtn" class="btn">Terminate All Processes and Resources</button>
-            <button id="runBtn" class="btn" onclick="exe()">Run</button>
+        <div class="output-section">
+            <h4>Execution Output</h4>
+            <div id="out"></div>
         </div>
-
-        <p id="out"></p>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
